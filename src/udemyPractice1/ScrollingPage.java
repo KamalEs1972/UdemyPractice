@@ -66,7 +66,7 @@ public class ScrollingPage {
         driver.findElement(By.id("autocomplete")).sendKeys(Keys.DOWN);
         driver.findElement(By.id("autocomplete")).sendKeys(Keys.DOWN);
         driver.findElement(By.id("autocomplete")).sendKeys(Keys.ENTER);
-        driver.findElement(By.id("autocomplete")).sendKeys(Keys.);
+
 
         System.out.println(driver.findElement(By.id("autocomplete")).getAttribute("value"));
 

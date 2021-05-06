@@ -1,7 +1,9 @@
 package testNgTutorial;
 
+import org.junit.Assert;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.BeforeTest;
+import org.testng.annotations.Parameters;
 import org.testng.annotations.Test;
 
 public class ForthClass {
@@ -12,18 +14,19 @@ public class ForthClass {
         System.out.println("Demo5");
     }
 
-    @Test
+    @Test(dependsOnMethods = {"demo8"})
     public void demo6() {
 
         System.out.println("demo6");
 
     }
 
-    @BeforeClass
+    @Test
     public void beforeClass() {
 
 
         System.out.println("Before Class");
+        Assert.assertTrue(false);
     }
         @Test(groups = "Smoke")
         public void demo7 () {
@@ -31,10 +34,11 @@ public class ForthClass {
 
             System.out.println("demo7");
         }
-        @BeforeTest
-        public void demo8 () {
+      @Parameters("url1")
+        @Test
+        public void demo8 (String name) {
 
-            System.out.println("Before Test");
+            System.out.println(name);
 
         }
     }

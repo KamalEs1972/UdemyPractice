@@ -1,5 +1,6 @@
 package testNgTutorial;
 
+import dataDriverTesting.XLUtility;
 import org.apache.poi.ss.usermodel.Cell;
 import org.apache.poi.ss.usermodel.Row;
 import org.apache.poi.xssf.usermodel.XSSFSheet;
@@ -55,22 +56,40 @@ public class ExcelCreateWrite {
     }
 
     @Test
-    public void testxx3() {
-       // ExcelReader excelReader;
+    public void testxx3() throws IOException {
+
+
 
         //excelReader = new ExcelReader("E:\\QE Automation\\UdemyData1.xlsx");
-        ExcelReader reader = new ExcelReader("E:\\QE Automation\\ExcelData\\Login.xlsx");
-        String sheetName = "Sheet2";
-     //   System.out.println("pass1");
+      //  ExcelReader reader = new ExcelReader("E:\\QE Automation\\ExcelData\\Login.xlsx");
+       // String sheetName = "testdata";
+        String path = "E:\\QE Automation\\UdemyData1.xlsx";
+        XLUtility xlUtility = new XLUtility(path);
+        int totalRows = xlUtility.getRowCount("testdata");
+        int totalCols = xlUtility.getCellCount("testdata", 1);
+       // String loginData[][] = new String[totalRows][totalCols];
 
-        int rowCount = reader.getRowCount(sheetName);
-       // System.out.println(rowCount);
+        for (int i = 1; i <= totalRows; i++)
+        {
+            for (int j = 0; j < totalCols; j++)
+            {
+               String loginData1 =xlUtility.getCellData("testdata",i,j);
+               // String loginData1[][] = new String[totalRows][totalCols];
+                System.out.println(loginData1);
+            }
+        }
 
-        for (int rowNum = 2; rowNum <= rowCount; rowNum++) {
-            String loginId = reader.getCellData(sheetName,"TestCases",rowNum);
-            System.out.println(loginId);
-            String data = reader.getCellData(sheetName, "data1", rowNum);
-            System.out.println(data);
+
+        //   System.out.println("pass1");
+
+//        int rowCount = reader.getRowCount(sheetName);
+//       // System.out.println(rowCount);
+//
+//        for (int rowNum = 2; rowNum <= rowCount; rowNum++) {
+//            String loginId = reader.getCellData(sheetName,"TestCases",rowNum);
+//            System.out.println(loginId);
+//            String data = reader.getCellData(sheetName, "data1", rowNum);
+//            System.out.println(data);
          //   String dataVa= reader.getCellData(sheetName,"data2",rowNum);
          //   System.out.println(dataVa);
           //  String dataMD = reader.getCellData(sheetName,"data3",rowNum);
@@ -95,5 +114,31 @@ public class ExcelCreateWrite {
 
 
         }
+        @Test
+        public void testRemoveSheet() throws IOException {
+            String path = "E:\\QE Automation\\ExcelData\\Login.xlsx";
+         //   XLUtility xlUtility = new XLUtility(path);
+           ExcelReader excelReader = new ExcelReader(path);
+           excelReader.removeSheet("sheet2");
+
+        }
+    @Test
+    public void testAddColumn() throws IOException {
+        String path = "E:\\QE Automation\\ExcelData\\Login.xlsx";
+       // XLUtility xlUtility = new XLUtility(path);
+        ExcelReader excelReader = new ExcelReader(path);
+        excelReader.addColumn("sheet1","Pass");
+
+
+    }
+    @Test
+    public void colorTest() throws IOException {
+        String path = "E:\\QE Automation\\ExcelData\\Login.xlsx";
+        XLUtility xlUtility = new XLUtility(path);
+       // ExcelReader excelReader = new ExcelReader(path);
+        xlUtility.fillGreenColor("sheet1",0,3);
+
+
     }
 }
+//}

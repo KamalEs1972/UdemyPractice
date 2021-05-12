@@ -12,6 +12,7 @@ import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 import java.io.*;
 
 public class XLUtility {
+    XLUtility xlUtility;
     public FileInputStream fi;
     public FileOutputStream fo;
     public XSSFWorkbook workbook;
@@ -21,7 +22,7 @@ public class XLUtility {
     public CellStyle style;
     String path;
 
-    XLUtility(String path)
+    public XLUtility(String path)
     {
         this.path=path;
     }
